@@ -36,8 +36,11 @@
       h4 Datas com apenas 2 dígitos
       <img src="@/y2k.png" alt="Y2K-2000" height="450" width="450">
 
+    slide(enter='fadeIn')
+      h1 Como resolver e/ou evitar?
+
     slide()
-      h1 Testar!
+      h1 Testando!
 
     slide(enter='fadeIn')
       h1 Mas como fazer isso?
@@ -45,11 +48,29 @@
     slide(enter='bounceInDown')
       h1 Testes Manuais vs Testes Automáticos
 
-    slide(:steps=3 enter='fadeIn')
+    slide(enter='fadeIn')
       h1 Mas qual ferramenta utilizar?
-      #bibliotecas(v-if='step >= 2')
-        <img src="@/jest.png" alt="Y2K-2000" height="200" width="200">
-        <img src="@/mocha.png" alt="Y2K-2000" height="200" width="200">
+
+    slide.comparacao(enter='fadeIn')
+      <img id="jest" src="@/jest.png" alt="Y2K-2000" height="450" width="450">
+      <img id="mocha" src="@/mocha.png" alt="Y2K-2000" height="450" width="450">
+
+    slide(:steps=5 enter='fadeIn')
+      h1 Critérios de Avaliação
+      .criterios
+        ol
+          li(v-if='step >= 2') Configuração Inicial
+          li(v-if='step >= 3') Sintaxe ou Legibilidade
+          li(v-if='step >= 4') Desempenho
+          li(v-if='step >= 5') Curva de Aprendizado
+    slide(:steps=3 enter="fadeIn")
+      h1 Configuração Inicial
+      h2 Instalação
+      .instalacao
+        eg-transition(enter='fadeIn')
+          eg-code-block(lang='bash' v-if='step >= 2') $ yarn add --dev jest
+        eg-transition(enter='fadeIn' )
+          eg-code-block(lang='bash' v-if='step >= 3') $ yarn add --dev mocha
 </template>
 
 <script>
@@ -73,7 +94,7 @@ export default {
     font-size: 16px;
     background-color: #eef;
     .eg-slide{
-      .eg-slide-content{
+      .eg-slide-content {
         height: 100%;
         max-width: 80%;
         margin: 0 auto;
@@ -81,39 +102,70 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .tema,.aluno {
-          width: 100%;
-        }
-        .aluno {
-          margin-top: 50px;
-        }
-        .tema h1 {
-          text-align: justify;
-        }
-        .aluno h2 {
-          text-align: end;
-          font-size: 1.5rem;
-        }
-        #problemas p {
+        p {
           font-size: 3rem;
           margin-bottom: 20px;
         }
-        #resultado {
-          display: flex;
-          justify-content: space-around;
+      }
+      .tema,.aluno {
+        width: 100%;
+      }
+      .aluno {
+        margin-top: 50px;
+      }
+      .tema h1 {
+        text-align: justify;
+      }
+      .aluno h2 {
+        text-align: end;
+        font-size: 1.5rem;
+      }
+      .criterios {
+        width: 100%;
+        li {
+          font-size: 3rem;
         }
-        #destaque-1, #destaque-2 {
-          font-weight: bold;
+      }
+      .instalacao {
+        margin-top: 50px;
+        .eg-code-block {
+          margin-bottom: 50px;
         }
-        #destaque-2 {
-          color: #FA0D00;
+        code {
+          border: 2px solid black;
+          border-radius: 10px;
+          box-shadow: 5px 5px 10px;
+          font-size: 2rem;
+          padding: 10px;
         }
-        #bibliotecas {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 50px;
-          width: 100%;
-        }
+      }
+      #resultado {
+        display: flex;
+        justify-content: space-around;
+      }
+      #destaque-1, #destaque-2 {
+        font-weight: bold;
+      }
+      #destaque-2 {
+        color: #FA0D00;
+      }
+    }
+    .comparacao {
+      background: url("../../duelo2.jpg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      .eg-slide-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #jest {
+        transform: translate(-90px, 30px) rotateY(25deg)
+      }
+      #mocha {
+        transform: translateX(80px) rotateY(-30deg)
       }
     }
   }

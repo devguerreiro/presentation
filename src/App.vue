@@ -1,7 +1,7 @@
 <template lang='pug'>
 #app
-  #logo-ifc <img src="@/logo-ifc.png" alt="Logo IFC" height="75" width="200">
-  #logo-vuejs <img src="@/logo-vuejs.png" alt="Logo Vue.js" height="75" width="125">
+  #logo-ifc <img src="@/logo-ifc.png" alt="Logo IFC" height="75" width="250">
+  #logo-vuejs <img src="@/logo-vuejs.png" alt="Logo Vue.js" height="75" width="100">
   router-view
 </template>
 

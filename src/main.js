@@ -5,9 +5,15 @@ import Home from './Home'
 
 import Eagle, { Options } from 'eagle.js'
 import 'eagle.js/dist/eagle.css'
-import hljs from 'highlight.js'
+
+import hljs from 'highlight.js/lib/highlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import bash from 'highlight.js/lib/languages/bash'
 
 import slideshows from './slideshows/slideshows.js'
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('bash', bash)
 /* eslint-disable no-new */
 
 Vue.use(Eagle)
