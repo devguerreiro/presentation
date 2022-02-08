@@ -63,14 +63,45 @@
           li(v-if='step >= 3') Sintaxe ou Legibilidade
           li(v-if='step >= 4') Desempenho
           li(v-if='step >= 5') Curva de Aprendizado
-    slide(:steps=3 enter="fadeIn")
+    slide(:steps=13 enter="fadeIn")
       h1 Configuração Inicial
-      h2 Instalação
+      h2(v-if='step >= 1 && step <= 3') Instalação
       .instalacao
         eg-transition(enter='fadeIn')
-          eg-code-block(lang='bash' v-if='step >= 2') $ yarn add --dev jest
+          eg-code-block(lang='bash' v-if='step >= 2 && step < 4') $ yarn add --dev jest
         eg-transition(enter='fadeIn' )
-          eg-code-block(lang='bash' v-if='step >= 3') $ yarn add --dev mocha
+          eg-code-block(lang='bash' v-if='step >= 3 && step < 4') $ yarn add --dev mocha
+      h2(v-if='step >= 4') Escrita dos Testes
+      .classe
+        eg-transition(enter='fadeIn')
+          eg-code-block(v-if='step === 4' lang='javascript').
+            class Pessoa {
+              MAIORIDADE = 18
+
+              constructor(nome, idade) {
+                this.nome = nome
+                this.idade = idade
+              }
+
+              ehAdulta() {
+                return this.idade >= this.MAIORIDADE
+              }
+            }
+
+            module.exports = Pessoa;
+        eg-transition(enter='fadeIn')
+          eg-code-block(v-if='step >= 5' lang='javascript').
+            const assert = require("assert")
+            const Pessoa = require("../Pessoa")
+
+            describe("Classe Pessoa", () => {
+              it('deve retornar verdadeiro se uma pessoa for maior de idade', () => {
+                const Fulano = new Pessoa("Fulano", 19)
+
+                assert.equal(Fulano.ehAdulta(), true)
+              });
+            }
+
 </template>
 
 <script>
@@ -130,13 +161,19 @@ export default {
         margin-top: 50px;
         .eg-code-block {
           margin-bottom: 50px;
-        }
-        code {
           border: 2px solid black;
           border-radius: 10px;
           box-shadow: 5px 5px 10px;
           font-size: 2rem;
-          padding: 10px;
+        }
+      }
+      .classe {
+        margin-top: 50px;
+        .eg-code-block {
+          border: 2px solid black;
+          border-radius: 10px;
+          box-shadow: 5px 5px 10px;
+          font-size: 2rem;
         }
       }
       #resultado {
