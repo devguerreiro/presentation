@@ -6,6 +6,7 @@ import Home from './Home'
 import Eagle, { Options } from 'eagle.js'
 import 'eagle.js/dist/eagle.css'
 
+import '@/slideshows/presentation/styles/palenight.css'
 import hljs from 'highlight.js/lib/highlight'
 import javascript from 'highlight.js/lib/languages/javascript'
 import bash from 'highlight.js/lib/languages/bash'
