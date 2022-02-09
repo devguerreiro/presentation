@@ -8,7 +8,7 @@
         h2 Aluno: Luis Fernando Carvalho Guerreiro da Silva
         h2 Orientador: Prof. Dr. Eduardo da Silva
 
-    slide(:steps=6 enter='swing')
+    slide(:steps=6 enter='bounceIn')
       h1 Problemas
 
       #problemas
@@ -26,12 +26,12 @@
             eg-transition(enter='tada')
               p(v-if='step >= 6') = Baixa Qualidade
 
-    slide
+    slide(enter='fadeIn')
       h1 Therac-25
       h4 Condição de corrida
       <img src="@/therac.png" alt="Therac-25">
 
-    slide
+    slide(enter='fadeIn')
       h1 Y2K-2000
       h4 Datas com apenas 2 dígitos
       <img src="@/y2k.png" alt="Y2K-2000" height="450" width="450">
@@ -59,10 +59,14 @@
       h1 Critérios de Avaliação
       .criterios
         ol
-          li(v-if='step >= 2') Configuração Inicial
-          li(v-if='step >= 3') Sintaxe ou Legibilidade
-          li(v-if='step >= 4') Desempenho
-          li(v-if='step >= 5') Curva de Aprendizado
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 2') Configuração Inicial
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 3') Sintaxe ou Legibilidade
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 4') Desempenho
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 5') Curva de Aprendizado
     slide(:steps=3 enter='fadeIn')
       h1 Configuração Inicial
       h2 Instalação
@@ -99,8 +103,8 @@
           img(src="@/mocha.png" alt="Mocha Logo" height="150" width="150")
         eg-transition(enter='fadeIn')
           eg-code-block(lang='javascript').
-            const assert = require("assert") <eg-code-comment :active='step === 2' enter='flipInY'> Importa asserção do Node.js</eg-code-comment>
-            const Pessoa = require("../Pessoa") <eg-code-comment :active='step === 3' enter='flipInY'> Importa a classe Pessoa</eg-code-comment>
+            const assert = require("assert") <eg-code-comment :active='step === 2 && true' enter='flipInY'> Importa asserção do Node.js</eg-code-comment>
+            const Pessoa = require("../Pessoa") <eg-code-comment :active='step === 3 && true' enter='flipInY'> Importa a classe Pessoa</eg-code-comment>
 
             describe("Classe Pessoa", () => { <eg-code-comment :active='step === 4' enter='flipInY'> Define o escopo do teste</eg-code-comment>
               it('deve retornar verdadeiro se uma pessoa for maior de idade', () => { <eg-code-comment :active='step === 5' enter='flipInY'> Descreve o teste</eg-code-comment>
@@ -162,72 +166,81 @@
     slide(:steps='6' enter='fadeIn')
       h1 Desempenho
       .desempenho
+        .airbnb(v-if='step === 1')
+          img(src='@/airbnb.png' width='350')
+          p Gary Borton
         ul
-          li(v-if='step >= 2 && step < 5') Paralelização
-          li(v-if='step >= 3 && step < 5') Round Robin
-          li(v-if='step >= 4 && step < 5') Cache
-        table(v-if='step >= 5')
-          thead
-            tr
-              th Execução
-              th Resultado Mocha (s)
-              th Resulta Jest (s)
-          tbody
-            tr
-              td 1
-              td 0.3
-              td 0.194
-            tr
-              td 2
-              td 0.2
-              td 0.178
-            tr
-              td 3
-              td 0.3
-              td 0.221
-            tr
-              td 4
-              td 0.3
-              td 0.167
-            tr
-              td 5
-              td 0.3
-              td 0.177
-            tr(v-if='step === 6').bold
-              td Média
-              td 0.28
-              td 0.187
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 2 && step < 5') Paralelização
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 3 && step < 5') Round Robin
+          eg-transition(enter='fadeIn')
+            li(v-if='step >= 4 && step < 5') Cache
+        eg-transition(enter='fadeIn')
+          table(v-if='step >= 5')
+            thead
+              tr
+                th Execução
+                th Resultado Mocha (s)
+                th Resulta Jest (s)
+            tbody
+              tr
+                td 1
+                td 0.3
+                td 0.194
+              tr
+                td 2
+                td 0.2
+                td 0.178
+              tr
+                td 3
+                td 0.3
+                td 0.221
+              tr
+                td 4
+                td 0.3
+                td 0.167
+              tr
+                td 5
+                td 0.3
+                td 0.177
+              eg-transition(enter='bounceIn')
+                tr(v-if='step === 6').bold
+                  td Média
+                  td 0.28
+                  td 0.187
     slide
       h1 Curva de Aprendizado
       .curva
-        img(src='@/graph.png' alt="Gráfico Pesquisa" height='450')
+        img(src='@/graph.png' alt="Gráfico Pesquisa" height='500')
         p Satisfação: usariam novamente / (usariam novamente + não usariam novamente)
     slide
       h1 Conclusão
       .conclusao
-        table
-          thead
-            tr
-              th Critério
-              th Mocha
-              th Jest
-          tbody
-            tr
-              td Configuração Inicial
-              td A configuração inicial é simples em aplicações pouco complexas. Em aplicações mais complexas é necessário adicionar funcionalidades através de outras bibliotecas
-              td A configuração inicial é simples mesmo em aplicações mais complexas
-            tr
-              td Sintaxe/Legibilidade
-              td Dependendo da biblioteca utilizada em conjunto, a sintaxe/legibilidade pode não ser muito compreensível
-              td As APIs integradas são de fácil compreensão pois permitem uma leitura mais natural
-            tr
-              td Desempenho
-              td Possui desempenho inferior por executar por padrão em modo serial
-              td Possui melhor desempenho devido à paralelização, por utilizar round robin e fazer uso de cache com babel
-            tr
-              td Aprendizado
-              td Por possuir diversas bibliotecas compatíveis, é possível que se trabalhe em uma aplicação que utilize uma biblioteca da qual não possui conhecimento, sendo necessário aprender a utilizá-la
-              td Tem a maior parte da comunidade utilizando e satisfeitos. Quem domina Jest consegue trabalhar em qualquer aplicação que utilize Jest
+        eg-transition(enter='fadeIn')
+          table
+            thead
+              tr
+                th Critério
+                th Mocha
+                th Jest
+            tbody
+              tr
+                td Configuração Inicial
+                td A configuração inicial é simples em aplicações pouco complexas. Em aplicações mais complexas é necessário adicionar funcionalidades através de outras bibliotecas
+                td A configuração inicial é simples mesmo em aplicações mais complexas
+              tr
+                td Sintaxe/Legibilidade
+                td Dependendo da biblioteca utilizada em conjunto, a sintaxe/legibilidade pode não ser muito compreensível
+                td As APIs integradas são de fácil compreensão pois permitem uma leitura mais natural
+              tr
+                td Desempenho
+                td Possui desempenho inferior por executar por padrão em modo serial
+                td Possui melhor desempenho devido à paralelização, por utilizar round robin e fazer uso de cache com babel
+              tr
+                td Aprendizado
+                td Por possuir diversas bibliotecas compatíveis, é possível que se trabalhe em uma aplicação que utilize uma biblioteca da qual não possui conhecimento, sendo necessário aprender a utilizá-la
+                td Tem a maior parte da comunidade utilizando e satisfeitos. Quem domina Jest consegue trabalhar em qualquer aplicação que utilize Jest
     slide
       h1 Dúvidas?
       .duvidas
@@ -254,6 +267,9 @@ export default {
     font-family: 'Raleway';
     font-size: 16px;
     background-color: #eef;
+    img {
+      max-width: 100%;
+    }
     .eg-slide{
       .eg-slide-content {
         height: 100%;
@@ -349,14 +365,20 @@ export default {
         width: 100%;
         font-size: 3rem;
         margin-top: 50px;
-        display: flex;
-        justify-content: center;
+        .airbnb {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         table, th, td {
           border: 1px solid black;
           padding: 10px;
         }
+        table {
+          margin: 0 auto;
+        }
         li {
-          margin-top: 50px;
+          margin-top: 25px;
         }
       }
       .curva {
