@@ -21,7 +21,7 @@
         #resultado
           #destaque-1
             eg-transition(enter='slideInLeft')
-              p(v-if='step >= 5') = Falta de testes
+              p(v-if='step >= 5') = Ausência de testes
           #destaque-2
             eg-transition(enter='tada')
               p(v-if='step >= 6') = Baixa Qualidade
